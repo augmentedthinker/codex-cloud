@@ -1,30 +1,35 @@
 # Codex Cloud
 
-This repository is a small experiment space for comparing the Codex Cloud coding interface against the usual OpenClaw workflow through Telegram and the local workspace.
+This repository is a small experiment space for comparing the Codex Cloud coding interface against the usual OpenCall workflow through Telegram and the local workspace.
 
-The first goal is simple:
+The current goal is simple:
 
-- give Codex Cloud a clean repository to modify;
+- give Codex Cloud a clean static workspace to modify;
 - keep the project lightweight enough that changes are easy to inspect;
-- compare coding quality, autonomy, speed, friction, and compute cost;
-- learn whether this route is useful for Christopher and OpenClaw's broader build process.
+- collect completed browser-visible outputs as artifacts;
+- provide a clear handoff page where OpenCall can send future tasks;
+- compare coding quality, autonomy, speed, friction, and compute cost.
 
 ## Starting Surface
 
-The repository begins with a single static HTML page:
+The repository is intentionally static and framework-free:
 
-- `index.html`
+- `index.html` is the Codex Cloud homepage and primary launchpad.
+- `handoffs.html` is the placeholder task intake page for OpenCall handoffs.
+- `artifacts.html` is the artifact index, with newest artifacts listed first.
+- `artifacts/first-collaboration.html` preserves the first polished HTML page as the first artifact.
+- `styles.css` contains the shared visual system for the homepage, handoffs page, and artifact index.
 
-There is no framework, build system, or package manager yet. That is intentional. Future changes should add complexity only when the experiment actually needs it.
+There is no framework, build system, or package manager yet. Future changes should add complexity only when the experiment actually needs it.
 
 ## Experiment Questions
 
 - Does Codex Cloud handle small repo changes cleanly?
-- Does it make better or worse implementation choices than OpenClaw's normal local workflow?
+- Does it make better or worse implementation choices than OpenCall's normal local workflow?
 - Is the review/edit loop faster or slower?
 - Does it reduce compute or operational friction?
-- What kinds of tasks should stay in OpenClaw, and what kinds should move to Codex Cloud?
+- What kinds of tasks should stay in OpenCall, and what kinds should move to Codex Cloud?
 
 ## Current Status
 
-The first Codex Cloud handoff has upgraded `index.html` into a polished, browser-ready collaboration landing page with animated CSS, inline SVG artwork, responsive layout, and reduced-motion support.
+Codex Cloud now has a lightweight landing page with static navigation to the handoff queue and artifact library. The original polished collaboration page has been moved into the artifact library as the first artifact.
