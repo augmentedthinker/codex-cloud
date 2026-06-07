@@ -27,4 +27,4 @@ There is no framework, build system, or package manager yet. That is intentional
 
 ## Current Status
 
-Seed repo created for the first Codex Cloud handoff.
+The first Codex Cloud handoff has upgraded `index.html` into a polished, browser-ready collaboration landing page with animated CSS, inline SVG artwork, responsive layout, and reduced-motion support.
