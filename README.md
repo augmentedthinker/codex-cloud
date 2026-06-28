@@ -15,6 +15,7 @@ The current goal is simple:
 The repository is intentionally static and framework-free:
 
 - `index.html` is the Codex Cloud homepage and primary launchpad.
+- `last30days.html` is a static browser app inspired by mvanhorn/last30days-skill for building recent multi-source research briefs.
 - `handoffs.html` is the placeholder task intake page for OpenCall handoffs.
 - `artifacts.html` is the artifact index, with newest artifacts listed first.
 - `artifacts/first-collaboration.html` preserves the first polished HTML page as the first artifact.
@@ -32,4 +33,4 @@ There is no framework, build system, or package manager yet. Future changes shou
 
 ## Current Status
 
-Codex Cloud now has a lightweight landing page with static navigation to the handoff queue and artifact library. The original polished collaboration page has been moved into the artifact library as the first artifact.
+Codex Cloud now has a lightweight landing page with static navigation to the Last 30 Days research app, handoff queue, and artifact library. The original polished collaboration page has been moved into the artifact library as the first artifact.

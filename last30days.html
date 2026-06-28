@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Last 30 Days research app for turning a topic into a fresh multi-source intelligence brief.">
+    <title>Last 30 Days · Codex Cloud</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="aurora" aria-hidden="true"></div>
+
+    <div class="shell">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="index.html" aria-label="Codex Cloud home">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          Codex Cloud
+        </a>
+        <div class="nav-links">
+          <a href="last30days.html" aria-current="page">Last 30 Days</a>
+          <a href="handoffs.html">Handoffs</a>
+          <a href="artifacts.html">Artifacts</a>
+        </div>
+      </nav>
+
+      <main>
+        <header class="page-header app-header">
+          <p class="eyebrow">Research pulse app</p>
+          <h1><span class="gradient-text">Last 30 Days</span></h1>
+          <p class="lede">
+            A browser app inspired by <a href="https://github.com/mvanhorn/last30days-skill">mvanhorn/last30days-skill</a>: enter any topic, tune the sources, and generate a copy-ready brief for researching what people are saying right now.
+          </p>
+        </header>
+
+        <section class="app-grid" aria-labelledby="app-title">
+          <form class="app-card app-form" id="research-form">
+            <div>
+              <p class="eyebrow">Brief builder</p>
+              <h2 id="app-title">Create a fresh research request</h2>
+            </div>
+
+            <label class="field">
+              <span>Topic</span>
+              <input id="topic" name="topic" type="text" value="AI agent skills for content research" autocomplete="off" required>
+            </label>
+
+            <div class="field-row">
+              <label class="field">
+                <span>Audience</span>
+                <select id="audience" name="audience">
+                  <option>founders and builders</option>
+                  <option>product marketers</option>
+                  <option>software engineers</option>
+                  <option>investors</option>
+                  <option>curious beginners</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Output style</span>
+                <select id="style" name="style">
+                  <option>executive brief</option>
+                  <option>content outline</option>
+                  <option>competitive scan</option>
+                  <option>trend memo</option>
+                  <option>launch research</option>
+                </select>
+              </label>
+            </div>
+
+            <fieldset class="source-picker">
+              <legend>Sources to include</legend>
+              <label><input type="checkbox" name="sources" value="Reddit" checked> Reddit</label>
+              <label><input type="checkbox" name="sources" value="X" checked> X</label>
+              <label><input type="checkbox" name="sources" value="YouTube" checked> YouTube</label>
+              <label><input type="checkbox" name="sources" value="Hacker News" checked> Hacker News</label>
+              <label><input type="checkbox" name="sources" value="Polymarket"> Polymarket</label>
+              <label><input type="checkbox" name="sources" value="Web search" checked> Web search</label>
+            </fieldset>
+
+            <button class="button" type="submit">Generate brief →</button>
+          </form>
+
+          <section class="app-card output-card" aria-live="polite">
+            <div class="output-toolbar">
+              <span class="pill"><span class="pulse" aria-hidden="true"></span> Ready to synthesize</span>
+              <button class="button secondary small-button" id="copy-button" type="button">Copy brief</button>
+            </div>
+            <div id="brief-output" class="brief-output"></div>
+          </section>
+        </section>
+
+        <section class="section feature-strip" aria-label="App capabilities">
+          <article class="card">
+            <strong>Recent by default</strong>
+            <p>Frames every request around the last 30 days, so the output prioritizes current conversations over stale evergreen summaries.</p>
+          </article>
+          <article class="card">
+            <strong>Multi-source lens</strong>
+            <p>Combines social chatter, video transcripts, technical threads, market signals, and web results into one grounded research prompt.</p>
+          </article>
+          <article class="card">
+            <strong>Agent-ready handoff</strong>
+            <p>Produces a structured brief you can paste into an agent, research workflow, or editorial planning doc.</p>
+          </article>
+        </section>
+      </main>
+
+      <footer>
+        <span>Inspired by last30days-skill.</span>
+        <span><a href="index.html">Return home</a></span>
+      </footer>
+    </div>
+
+    <script>
+      const form = document.querySelector('#research-form');
+      const output = document.querySelector('#brief-output');
+      const copyButton = document.querySelector('#copy-button');
+
+      function selectedSources() {
+        return Array.from(document.querySelectorAll('input[name="sources"]:checked')).map((source) => source.value);
+      }
+
+      function buildBrief() {
+        const topic = document.querySelector('#topic').value.trim() || 'Untitled topic';
+        const audience = document.querySelector('#audience').value;
+        const style = document.querySelector('#style').value;
+        const sources = selectedSources();
+        const sourceText = sources.length ? sources.join(', ') : 'web search';
+
+        return `Research "${topic}" across the last 30 days for ${audience}.\n\nOutput: ${style}.\n\nSources to prioritize: ${sourceText}.\n\nInclude:\n1. Top recurring claims, complaints, questions, and praise.\n2. Concrete examples with source names, dates, links, and engagement signals when available.\n3. What changed recently versus older consensus.\n4. Contradictions, minority opinions, and uncertainty.\n5. Five actionable takeaways and three follow-up searches.\n\nGround the synthesis in recent evidence. Do not overstate weak signals. Separate facts from interpretations.`;
+      }
+
+      function renderBrief() {
+        output.textContent = buildBrief();
+      }
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        renderBrief();
+      });
+
+      form.addEventListener('input', renderBrief);
+
+      copyButton.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(output.textContent);
+        copyButton.textContent = 'Copied!';
+        setTimeout(() => { copyButton.textContent = 'Copy brief'; }, 1400);
+      });
+
+      renderBrief();
+    </script>
+  </body>
+</html>
